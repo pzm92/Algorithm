@@ -1,0 +1,70 @@
+// 시작시간 : 2023-10-10T12:40 
+// 종료시간 : 2023-10-10T13:45
+// 65분 소요 ( 실패 )
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+struct Graph_Node
+{
+	int Node_Number = 0;
+	int CurruntIndex = 0; // 순회중인 노드를 저장할 변수
+	vector<int> NeighborNode; // 간선으로 연결된 노드의 이름(숫자)를 저장할 공간.
+	// 간선으로 연결된 인접노드가 있는가? True = 있다. false = 없다.
+	bool bNeighbor; 
+};
+
+void DFS(vector<Graph_Node> Node, int N, int M, int V);
+
+int main()
+{
+	int N = 0, M = 0, V = 0;
+	cin >> N >> M >> V;
+	vector<Graph_Node> Node(N + 1);
+	for (int i = 1; i < N + 1; i++)
+	{
+		Node[i].Node_Number = i;		
+	}
+
+	/*
+	{
+		for (int i = 1; i < N + 1; i++)
+		{
+			cout << Node[i].Node_Number << endl;
+		}
+	}
+	*/
+
+	int start = -1, end = -1;
+	for (int i = 0; i < M; i++)
+	{
+		cin >> start >> end;
+		Node[start].NeighborNode.push_back(end);
+		Node[start].bNeighbor = true;		
+	}
+	
+	//DFS
+	DFS(Node, N, M, V);
+
+	// BFS
+
+	printf("N = %d, M = %d, V = %d\n", N, M, V);
+	return 0;
+}
+
+void DFS(vector<Graph_Node> Node, int N, int M, int V)
+{
+	// DFS
+	for (int j = 0; j < Node[1].NeighborNode.capacity(); j++)
+	{
+		Node[1].NeighborNode[j];
+		if (Node[j].bNeighbor == true)
+			DFS(Node, N, M, V);
+		else if (Node[j].bNeighbor == false)
+		{
+			cout << Node[1].Node_Number << " ";
+			return;
+		}
+	}
+}
