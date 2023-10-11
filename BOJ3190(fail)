@@ -1,0 +1,89 @@
+// 20231011T1845 - 20231011T1945
+#include <iostream>
+#include <map>
+
+
+struct Snake
+{
+	int x;
+	int y;
+	int Direction = 1;
+	int length;
+};
+
+int main()
+{
+	Snake S = { 0, 0, 1};
+	int N; // 보드의 크기 N X N 정사각모양
+	int K; // 사과의 갯수
+	std::cin >> N >> K; 
+
+	int field[101][101] = { 0, };
+
+	for (int i = 0; i < N + 1; i++)
+	{
+		for (int j = 0; j < N + 1; j++)
+		{
+			if (i == 0 || j == 0 || i == N || j == N)
+			{
+				field[i][j] = 1; // 필드의 벽의 크기를 정함
+			}			
+		}
+	}
+	
+	std::map<std::map<int, int>, bool> apple;
+	// K개의 줄만큼 사과의갯수가 주어진다.
+	for (int i = 0; i < K; i++) 
+	{
+		// 각사과의 위치가 행렬로 주어진다.
+		int x, y;
+		std::cin >> x >> y;
+		apple[{x, y}] = true;		
+	}
+	
+	// 뱀의 방향 변환 횟수 L. (1<=L<=100)
+	int L;
+	std::cin >> L;
+
+	std::map<int, char> Path;
+
+	int* X = new int; char* c = new char;
+	X = 0, c = NULL;
+	// L개의 횟수만큼 뱀의 방향 정보가 주어진다.
+	for (int i = 0; i < L; i++)
+	{
+		// 방향정보는 정수X와 문자C로 이루어져 있다.
+		// X초 후 C가 왼쪽(L) 혹은 오른쪽(D) 으로 90도 회전시킨다는 뜻
+		// X는 10000 이하의 양의 정수이며, 방향전환 정보는 X가 증가하는 순으로 주어진다.
+		std::cin >> *X >> *c;
+		Path.insert(std::make_pair(*X, *c));
+	}
+
+
+	// 계산
+	int time = 0;
+
+	// 반복문
+	while (time <= 10000)
+	{
+		time++; 
+
+		if (int key = Path.find(time) != Path.end())
+		{
+			if ('L' == Path.at(key))
+			{
+				// 왼쪽으로 갈 때 처리
+			}
+			else if ( 'D' == Path.at(key))
+			{
+				// 오른쪽으로 갈 때 처리
+			}
+			
+		}		
+	}
+
+	delete X;
+	delete c;
+
+	return 0;
+}
