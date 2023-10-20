@@ -1,0 +1,46 @@
+// BOJ2910(GPT)
+// 20231020T1440 - 20231020T1522
+
+#include <iostream>
+#include <vector>
+#include <map>
+#include <unordered_map>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int N, C;
+    cin >> N >> C;
+
+    vector<int> message(N);
+    for (int i = 0; i < N; i++) {
+        cin >> message[i];
+    }
+
+    map<int, int> frequency; // 빈도를 저장할 맵
+    unordered_map<int, int> originalOrder; // 숫자의 원래 순서를 저장할 맵
+
+    for (int i = 0; i < N; i++) {
+        frequency[message[i]]++; // 각 숫자의 빈도를 계산
+        if (originalOrder.find(message[i]) == originalOrder.end()) {
+            originalOrder[message[i]] = i; // 숫자의 원래 순서를 저장 (첫 등장만)
+        }
+    }
+
+    // 빈도가 높은 순서대로 정렬
+    sort(message.begin(), message.end(), [&](int a, int b) {
+        if (frequency[a] == frequency[b]) {
+            return originalOrder[a] < originalOrder[b]; // 빈도가 같으면 숫자의 원래 순서대로
+        }
+        return frequency[a] > frequency[b]; // 빈도가 높은 순서대로
+        });
+
+    for (int i = 0; i < N; i++) {
+        cout << message[i] << " ";
+    }
+
+    cout << endl;
+
+    return 0;
+}
