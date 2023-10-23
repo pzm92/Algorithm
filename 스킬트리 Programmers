@@ -1,0 +1,31 @@
+// 스킬트리
+// https://school.programmers.co.kr/learn/courses/30/lessons/49993?language=c
+// 20231024T0458 - 20231024T0538
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+// skill_trees는 길이 1 이상 20 이하인 배열입니다.
+// skill_trees의 원소는 스킬을 나타내는 문자열입니다.
+// 파라미터로 주어지는 문자열은 const로 주어집니다. 변경하려면 문자열을 복사해서 사용하세요.
+// skill_trees_len은 배열 skill_trees의 길이입니다.
+// CBD, FEC
+// 'A' = 97
+int solution(const char* skill, const char* skill_trees[], size_t skill_trees_len) 
+{
+    int answer = 0;
+    int Index = 0;
+    for (int i = 0; i < skill_trees_len; i++)
+    {        
+        for (int k = 0, Index = 0; k < strlen(skill_trees[i]); k++)
+        {
+            if (skill[Index] == NULL) answer++;
+            if (skill[Index] == skill_trees[i][k])
+            {
+                Index++; 
+            }   
+            else if(skill[Index] == NULL) answer++;
+        }
+    }   
+    return answer;
+}
