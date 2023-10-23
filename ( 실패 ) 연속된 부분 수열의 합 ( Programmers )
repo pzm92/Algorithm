@@ -1,0 +1,47 @@
+// 연속된 부분 수열의 합
+// https://school.programmers.co.kr/learn/courses/30/lessons/178870
+// 20231023T1637 - 20231023T1726
+
+#include <stdio.h>
+#include <iostream>
+#include <stdbool.h>
+#include <stdlib.h>
+using namespace std;
+
+// sequence_len은 배열 sequence의 길이입니다.
+int* solution(int sequence[], size_t sequence_len, int k) {
+    // return 값은 malloc 등 동적 할당을 사용해주세요. 할당 길이는 상황에 맞게 변경해주세요.
+    int* answer = (int*)malloc(sizeof(int) * 2);
+    answer[0] = answer[1] = -1;
+    //memset(answer, 0, 2 * sizeof(int));
+    int sum = 0;
+    int shortpath = 0;
+    int s = 0, e = 0;
+    
+    while (s < e && e < sequence_len)
+    {
+        if (sum < k){
+            sum += sequence[e++];
+        }
+        else if (sum == k){
+            answer[0] = s;
+            answer[1] = e;
+        }
+        if (sum > k)
+        {
+
+        } 
+    }      
+  
+    return answer;
+}
+
+int main()
+{       
+    int key = 6;
+    int Array[6] = { 1, 1, 2, 3, 4, 5 };     
+    int* result = (int*)malloc(sizeof(int) * 2);
+    memcpy(result, 0, 2 * sizeof(int));
+    result = solution(Array, sizeof(Array) / sizeof(int), key);
+    printf("%d\n", *result);
+}
