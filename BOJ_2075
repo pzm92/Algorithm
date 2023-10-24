@@ -1,0 +1,34 @@
+//BOJ_2075 : N번째 큰 수
+//Link : https://www.acmicpc.net/problem/2075
+//20231024T1326 - 20231024T1424
+//
+#include <stdio.h>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+int main()
+{
+	int n; // 1 <= n <= 1500
+	std::cin >> n;
+	std::vector<int> v;	
+
+	int nxn = n * n;
+	v.resize(nxn);
+
+	int i = 0 ;
+	while (i < nxn)	std::cin >> v[i++];		
+	// for (int i = 0; i < n ; i++)
+	// {
+	// 	for (int j = 0; j < n; j++)
+	// 	{
+	// 		int temp = 0;
+	// 		std::cin >> temp;		
+	// 		v.push_back(temp);
+	// 	}
+	// }
+	sort(v.begin(), v.end());			
+	std::cout << v[nxn - n] << "\n";
+	
+	return 0;
+}
