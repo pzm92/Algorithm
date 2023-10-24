@@ -1,0 +1,60 @@
+// 20231025T0700 - 20231025T0746
+// 가장 큰 수 Programmers 42746
+// Link : https://school.programmers.co.kr/learn/courses/30/lessons/42746
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+
+// numbers의 원소는 0 이상 1, 000 이하입니다.
+// numbers의 길이는 1 이상 100,000 이하입니다.
+// 정답이 너무 클 수 있으니 문자열로 바꾸어 return 합니다.
+// numbers_len은 배열 numbers의 길이입니다.
+char* solution(int numbers[], size_t numbers_len) {
+    // return 값은 malloc 등 동적 할당을 사용해주세요. 할당 길이는 상황에 맞게 변경해주세요.
+    char** storage = (char**)malloc(sizeof(char*) * numbers_len);
+    short** coord = (short**)malloc(sizeof(short*) * numbers_len);
+    for (int i = 0; i < numbers_len; i++)
+    {
+        storage[i] = (char*)malloc(sizeof(char) * 4);
+        memset(storage[i], '0', sizeof(char) * 4);
+
+        coord[i] = (short*)malloc(sizeof(short) * 2);
+        memset(coord[i], 0, sizeof(short) * 2);
+    }
+    for (int i = 0; i < numbers_len; i++)
+    {
+        char a[4] = { NULL, };
+        a[0] = (numbers[i] / 1000) + 48; 
+        a[1] = (numbers[i] / 100) + 48;
+        a[2] = (numbers[i] / 10) + 48;
+        a[3] = (numbers[i] % 10) + 48;      
+
+        for (int j = 0; j < 4; j++)
+            storage[i][j] = a[j];
+    }
+     
+    char num[10];
+    for (int i = 0; i < 10; i++)
+        num[i] = 48 + i;
+
+    // coord
+    for (int i = 0; i < numbers_len; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+
+        }
+    }
+    
+    char* answer = (char*)malloc(1);
+    return answer;
+}
+
+int main()
+{
+    int a[3] = { 6,10,2 };
+    solution(a, 3);
+    return 0;
+}
