@@ -1,0 +1,42 @@
+// 20231030T0845-20231030T0940
+// BOJ_11052 ( 실패 )
+// 카드 구매하기
+// Link : https://www.acmicpc.net/problem/11052
+
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+int main()
+{
+	// price = key, Cardnumber = value
+	map<int, vector<int>, greater<int>> info;
+	int N;
+	cin >> N;
+	for (int i = 1; i <= N; i++)
+	{
+		int price;
+		cin >> price;
+		// map 안에 vector를 넣었을 때, 
+		// vector 의 원소에 값을 넣기 위해서는 어떻게 해야하는가? 
+		// 에 대해서 생각하는 데에 시간을 많이 씀
+		info.insert(make_pair(price,i)); 	}
+	for (auto iter : info)
+	{
+		cout << "price = " << iter.first << ", ";
+		cout << "CardNumber = ";
+		for (int iter2 : iter.second)
+		{
+			cout << iter2 << ", ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
+
+// 민규는 카드의 개수가 적은 팩이더라도 가격이 비싸면 높은 등급의 카드가 많이 들어있을 것이라는 미신을 믿고 있다.
+/*
+입력
+첫째 줄에 민규가 구매하려고 하는 카드의 개수 N이 주어진다. (1 ≤ N ≤ 1,000)
+둘째 줄에는 Pi가 P1부터 PN까지 순서대로 주어진다. (1 ≤ Pi ≤ 10,000)
+*/
