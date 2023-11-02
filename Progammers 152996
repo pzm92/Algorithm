@@ -1,0 +1,44 @@
+// 20231103T0826 - 20231103T0849
+// 시소 짝꿍
+// Link :https://school.programmers.co.kr/learn/courses/30/lessons/152996
+//  즉, 탑승한 사람의 무게와 시소 축과 좌석 간의 거리의 곱이 양쪽 다 같다면 시소 짝꿍이라고 할 수 있습니다
+// 탑승한 사람의 무게
+// 시소 축과 좌석 간의 거리의 곱, 2, 3, 4
+
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+bool asdf(int a, int b)
+{
+    if (a == b) return true;
+    return false;
+}
+
+long long solution(vector<int> weights) {
+    long long answer = 0;
+    int indexstart = 0;
+    int indexend = 0;
+    int temp = 0;
+    // 우선 정렬을 한다.
+    sort(weights.begin(), weights.end());
+    
+    // 앞과 뒤가 같은 지의 경우의 수를 대조
+    for (int i = 0; i < weights.size(); i++)
+    {
+        for (int j = i + 1; j < weights.size(); j++)
+        {
+            if (asdf(weights[i], weights[j]) == true)
+                temp++;
+            else
+            {
+                i = j;
+            }
+        }
+    }
+
+    for(int i = 0;i<)
+       
+    answer++;
+    return answer;
+}
