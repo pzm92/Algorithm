@@ -1,0 +1,103 @@
+// 20231103T1704 - 20231103T1749
+// 1차[캐시]
+// Link : https://school.programmers.co.kr/learn/courses/30/lessons/17680
+/*
+["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "Jeju", "Pangyo", "Seoul", "NewYork", "LA"]
+1 : Jeju - miss : 5
+2 : Pangyo, Jeju  - miss : 5
+3 : seoul, Pangyo, Jeju - miss : 5
+4 : NewYork, seoul, Pangyo - miss : 5
+5 : LA, NewYork, seoul - miss : 5
+...
+*/
+
+#include <string>
+#include <vector>
+
+using namespace std;
+
+struct Node
+{
+    string data;
+    Node* next = nullptr;
+
+    Node(string data)
+    {
+        this->data = data;
+    }
+};
+
+class List
+{
+public:
+    List()
+    {
+        head->next = tail;
+        tail->next = tail;
+    }
+    ~List() {}
+
+    void InsertHead(string name)
+    {
+        Node* Current = new Node(name);
+        if (head == nullptr)
+        {
+            head = Current;
+        }  
+        else
+        {
+            Current->next = head;
+            head = Current;
+        }        
+    }
+    Node* FindNode(string name)
+    {       
+        if (head == nullptr)
+            return nullptr;
+        else
+        {
+            Node* Current = head;
+            while (Current->next != tail)
+            {
+                if (Current->data == name)
+                    return Current;
+                Current = Current->next;
+            }
+        }
+    }
+public:
+    Node* head = nullptr;
+    Node* tail = nullptr;
+ 
+};
+
+int solution(int cacheSize, vector<string> cities) {
+    List list;
+    int result = 0;
+    int i = 0;
+    while (i < cities.size())
+    {
+        Node* Current = nullptr;
+        if ((Current = list.FindNode(cities[i])) != nullptr)
+        {            
+            result++; // hit
+        }
+        else
+        {
+            result =+ 5; // miss            
+        }
+        list.InsertHead(cities[i]);
+        i++;
+    }
+    int answer = 0;
+    return answer;
+}
+
+int main()
+{
+    vector<string> abc;
+    abc.push_back("A");
+    abc.push_back("B");
+    abc.push_back("C");
+    solution(3, abc);
+}
