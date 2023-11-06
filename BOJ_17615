@@ -1,0 +1,53 @@
+// 20231106T1909 - 20231106T
+// BOJ_17615
+// 볼 모으기 
+// Link : https://www.acmicpc.net/problem/17615
+
+#include <iostream>
+
+using namespace std;
+
+char arr[500001];
+int n, cnt, sw, m = 500001;
+int i, j;
+
+void set()
+{	
+	m = cnt < m ? cnt : m;
+	sw = 0;
+	cnt = 0;
+}
+
+int main()
+{
+	cin >> n;
+	cin >> arr;
+
+	for (i = 0; i < n; i++)
+	{
+		if(arr[i] == 'B') sw = 1;
+		if (sw && arr[i] == 'R') cnt++;
+	}
+	set();
+	for (i = n - 1; i >= 0; i--)
+	{
+		if (arr[i] == 'B') sw = 1;
+		if (sw && arr[i] == 'R') cnt++;
+	}
+	set();
+	for (i = 0; i < n; i++)
+	{
+		if (arr[i] == 'R') sw = 1;
+		if (sw && arr[i] == 'B') cnt++;
+	}
+	set();
+	for (i = n - 1; i >= 0; i--)
+	{
+		if (arr[i] == 'R') sw = 1;
+		if (sw && arr[i] == 'B') cnt++;
+	}
+	set();
+
+	cout << m;
+	return 0;
+}
