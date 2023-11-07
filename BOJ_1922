@@ -1,0 +1,91 @@
+// 20231107T1515 - 20231107T1615
+// BOJ_1922
+// Link : https://www.acmicpc.net/problem/1922
+// 첫째 줄에 컴퓨터의 수 N (1 ≤ N ≤ 1000)가 주어진다.
+// 둘째 줄에는 연결할 수 있는 선의 수 M(1 ≤ M ≤ 100, 000)가 주어진다.
+#include <iostream>
+#include <vector>
+using namespace std;
+void func1(vector<int>& endnum, int& min, int end, int endmin, int cost, bool& same);
+void main(void)
+{
+	int n; // 컴퓨터의 수 - 1 <= n <= 1000
+	int m; // 연결하는 선 - 1 <= m <= 100,000
+	cin >> n;
+	cin >> m;
+
+	/*
+	1 ㅡ 2 : 5
+	1 ㅡ 3 : 4
+	2 ㅡ 3 : 2
+	2 ㅡ 4 : 7
+	3 ㅡ 4 : 6
+	3 ㅡ 5 : 11
+	4 ㅡ 5 : 3
+	4 ㅡ 6 : 8
+	5 ㅡ 6 : 8
+	*/
+	//4+2+6+3+8
+	// 4+2+6+3+8
+	int start, end, cost;
+	int min, endmin;
+	int prev; // 이전에 시작한 번호
+	int result = 0; 
+	vector<int> endnum;
+	min = 10001;
+	for (int i = 0; i < m; i++)
+	{		
+		cin >> start;
+		if (i == 0) prev = start;
+		cin >> end;
+		cin >> cost;		
+		if (start == prev )
+		{
+			bool same = true;
+			for (int iter : endnum)
+			{
+				if (iter == end)
+				{					
+					same = false;
+				}
+			}
+			if (same == true)
+			{
+				min = min > cost ? cost : min;
+				if ( min == cost )
+				{
+					endmin = end;
+				}
+			}
+		}
+		else 
+		{
+			endnum.push_back(endmin); 
+			if (min != 10001) result += min;
+			min = 10001;
+			bool same = true;
+			for (int iter : endnum)
+			{
+				if (iter == end)
+				{
+					same = false;
+				}
+			}
+			if (same == true)
+			{
+				min = min > cost ? cost : min;
+				if (min == cost)
+				{
+					endmin = end;
+				}
+			}
+			prev = start;
+		}		
+	}	
+	cout << result << "\n";
+}
+
+void func1(vector<int>& endnum, int& min, int end, int endmin, int cost, bool& same)
+{
+
+}
