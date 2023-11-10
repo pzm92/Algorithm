@@ -1,0 +1,58 @@
+#include <string>
+#include <vector>
+#include <cmath>
+#include <iostream>
+
+bool isPrime(int num) {
+    if (num < 2) {
+        return false;
+    }
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int solution(int n, int k) {
+    int answer = 0;
+    std::string converted = "";
+
+    while (n > 0) {
+        converted = std::to_string(n % k) + converted;
+        n /= k;
+    }
+
+    int start = 0;
+    int end = 0;
+
+    while (end < converted.size()) {
+        while (end < converted.size() && converted[end] != '0') {
+            end++;
+        }
+
+        if (end > start && isPrime(std::stoi(converted.substr(start, end - start)))) {
+            answer++;
+        }
+
+        if (end < converted.size() && converted[end] == '0') {
+            end++;
+            start = end;
+        }
+    }
+
+    return answer;
+}
+
+int main() {
+    // 테스트 케이스
+    int result1 = solution(437674, 3);
+    int result2 = solution(110011, 10);
+
+    // 결과 출력
+    std::cout << result1 << std::endl; // 3
+    std::cout << result2 << std::endl; // 2
+
+    return 0;
+}
