@@ -1,0 +1,113 @@
+// 20231122T1454 - 20231122T1607
+// BOJ_2852 : NBA 농구 ( 실패 ) 
+// Link : https://www.acmicpc.net/problem/2852
+// LNK2019 링크오류 터져서 헤매다가 ( https://team00csduck.tistory.com/122 )
+// 시간 분초 특성 고려안하고 짜다가 망해버림
+/*
+NBA 라는 건 일단 "국가 농구 협회" 라는 뜻을 가지고 있다. 
+동혁이는 국가 농구 협회에서 주관 중인 경기를 보는가 보다.
+경기를 보는 중에 골이 들어갈 때마다 골이 들어간 시간(t)과 팀(name) 을 적는 이상한 취미를 가지고 있다.
+농구경기의 시간은 정확하게 48분 진행한다. 
+코딩 목적 : 각 팀에서 몇 분동안 이기고 있었는지 출력하는 프로그램을 작성하시오.
+골이 들어간 횟수 : N
+둘째줄부터 N개의 줄에 득점정보가 주어진다.
+득점정보 => 득점한 팀의 번호, 득점시간
+팀번호 : 1 또는 2
+특점시간 : MM:SS 의 분초 형식
+*/
+
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+struct info
+{
+	int number = 0;
+	int hour = 0, min = 0; // 시간, 분
+	info(int number, int hour, int min)
+		: number(number), hour(hour), min(min) {}	
+};
+int main()
+{
+	int n = 0;
+	cin >> n;
+	int num = 0;
+	char* str1 = (char*)malloc(sizeof(char) * 5);
+	char ch_arr[4] = { NULL, };
+	vector<info> v;
+	// 입력값들을 저장
+	for (int i = 0; i < n; i++)
+	{
+		cin >> num >> str1;		
+		char* c = str1;
+				
+		for (int j = 0, k = 0; j < 5 && c[j] != NULL; j++)
+		{
+			if (c[j] == ':') continue;
+			else
+			{
+				ch_arr[k] = c[j];
+				k++;
+			}
+		}	
+		
+		int h = 0, m = 0;
+		h = (ch_arr[0] - 48) * 10 + (ch_arr[1] - 48);
+		m = (ch_arr[2] - 48) * 10 + (ch_arr[3] - 48);
+		info* p = new info(num, h, m);
+		v.push_back(*p);
+	}
+
+	// 입력값이 제대로 됬는지 출력하기 위한 코드 ( 문제없음 )
+//	for (int i = 0; i < n; i++)
+//	{
+//		cout << i+1 << " : hour = " << v[i].hour << ", min = " << v[i].min << "\n";
+//	}
+
+	// 입력값들에 대한 처리
+	int TeamScore_1 = 0, TeamScore_2 = 0;
+	int winTime_1[2] = { 0 , }, winTime_2[2] = { 0, };
+	pair<int, int> prev_hm = make_pair(0, 0);
+	for (int i = 0; i <= n; i++)
+	{
+		if (v[i].number == 1) TeamScore_1++;
+		else if (v[i].number = 2) TeamScore_2++;
+
+		int temp_h = v[i].hour - prev_hm.first;
+		int temp_m = v[i].min - prev_hm.second;
+		
+		// 1팀과 2팀의 점수가 같다면 무효
+		if (TeamScore_1 == TeamScore_2)
+		{
+			prev_hm.first = v[i].hour;
+			prev_hm.second = v[i].min;
+			continue;
+		}
+
+		// 어느 팀의 스코어가 제일 높은가? True = 1팀, False = 2팀
+		bool bTrue = TeamScore_1 > TeamScore_2 ? true : false;
+		if (bTrue == true) // 1팀의 스코어가 높다면
+		{
+			winTime_1[0] = temp_h;
+			winTime_1[1] = temp_m;
+		}
+		else if (bTrue == false) // 2팀의 스코어가 높다면
+		{
+			winTime_2[0] = temp_h;
+			winTime_2[1] = temp_m;
+		}
+		
+		prev_hm.first = v[i].hour;
+		prev_hm.second = v[i].min;
+	}
+
+	// 48분 종료가 되었다면 처리할 부분
+	int temp_h = 48 - prev_hm.first;
+	int temp_m = prev_hm.second;
+	
+	// 결과 출력
+	cout << winTime_1[0] << ":" << winTime_1[1] << "\n";
+	cout << winTime_2[0] << ":" << winTime_2[1] << "\n";	
+		
+	return 0;
+}
