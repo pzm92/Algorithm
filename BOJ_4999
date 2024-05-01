@@ -1,0 +1,28 @@
+// BOJ_4999 : 아 !
+// 20240501T0925 - 20240501T0935
+
+#include <iostream>
+
+bool lengthCompare(int a, int b)
+{
+	if (a >= b)
+	{
+		return true;
+	}
+	return false;
+}
+
+void PrintResult(bool r)
+{
+	if (r == true) std::cout << "go\n";
+	else if (r == false) std::cout << "no\n";
+}
+
+int main()
+{
+	std::string a, b;
+	std::cin >> a >> b;
+
+	bool result = lengthCompare(a.length(), b.length());
+	PrintResult(result);	
+}
