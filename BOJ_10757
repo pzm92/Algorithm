@@ -1,0 +1,193 @@
+// BOJ_10757 : 큰 수 A+B 
+
+#include <iostream>
+#include <string>
+#include <vector>
+// 입력 
+// a = 9223372036854775807 
+// b = 9223372036854775808
+// 
+// 출력
+// 18446744073709551615
+
+template <typename T>
+void Swap(T& a, T& b)
+{
+	T temp = a;
+	a = b;
+	b = temp;
+}
+
+void Recur(char* c, bool swi = true)
+{
+	if (*c == NULL) return;
+
+	if (swi)
+	{
+		*c += 1;
+	}
+
+	if (*c > '9')
+	{
+		*c = '0';
+		Recur(c - 1);
+	}	
+}
+
+void Input(std::string* a, std::string* b, int* len1, int* len2, char* result)
+{
+	std::cin >> *a >> *b;
+	*len1 = a->length();
+	*len2 = b->length();
+	if (*len1 >= *len2)
+		for (size_t i = 0; i < *len1 + 1; i++)
+			result[i] = '0';
+	if(*len1 < *len2)
+		for (size_t i = 0; i < *len2 + 1; i++)
+			result[i] = '0';
+}
+
+void EqualLenSum(std::string* a, std::string* b, int l, char* result)
+{
+	for (int len = l; len > 0; len--)
+	{
+		// 숫자 형식으로 변환
+		int bIntA = (*a)[len - 1] - '0';
+		int bIntB = (*b)[len - 1] - '0';
+
+		// 두 수의 합
+		int SumAB = bIntA + bIntB;
+
+		{
+			int idx = len;
+			// 올림값이 있다면
+			if (SumAB >= 10)
+			{
+				// 앞자리에 대한 처리
+				result[idx - 1] += 1;
+				// Recur(&result[idx - 1]);
+			}
+
+			// 10을 나눈 나머지값에 대한 처리
+
+			result[idx] += SumAB % 10;
+			Recur(&result[idx], false);
+		}
+	}
+}
+
+
+
+void DiffLenSum(std::string* a, std::string* b, int len1, int len2, char* result)
+{
+	int Diffval = len1 - len2;
+	if (Diffval >= 0) // len1 이 크다면
+	{
+		// 필요없는 부분을 미리 잘라서 넣어둔다.
+		for (size_t i = 0; i < Diffval; i++)
+		{
+			result[i + 1] = (*a)[i];
+		}
+
+		// len2 + Diffval; <-- 이 형식으로 len1 처리
+		for (int len = len2, newlen1 = len2 + Diffval; len > 0; len--, newlen1--)
+		{
+			// 숫자 형식으로 변환
+			int bIntA = (*a)[newlen1 - 1] - '0';
+			int bIntB = (*b)[len - 1] - '0';
+
+			// 두 수의 합
+			int SumAB = bIntA + bIntB;
+//			std::cout << "bIntA = " << bIntA << ", bIntB = " << bIntB << ", SumAB = " << SumAB;
+
+			{
+				int idx = len + Diffval - 1;
+				// 올림값이 있다면
+				if (SumAB >= 10)
+				{
+					// result[idx - 1] += 1;
+					Recur(&result[idx]);
+					{
+						// 앞자리에 대한 처리
+						//if (result[idx - 1] > '9')
+						//{
+						//	if(result[idx - 2] != NULL)
+						//		result[idx - 2] += 1;
+						//	if (result[idx - 2] > '9')
+						//	{
+						//		if (result[idx - 3] != NULL)
+						//		{
+						//			// ...
+						//		}
+						//	}
+						//}
+					}
+				}
+
+				// 10을 나눈 나머지값에 대한 처리
+
+				result[idx+1] += SumAB % 10;
+				if (result[idx+1] > '9')
+					Recur(&result[idx+1], 0);
+//				std::cout << " : " << result[idx+1] << "\n";
+			}
+		}
+	}
+	else if (Diffval < 0) // len2 가 크다면
+	{
+		// 필요없는 부분을 미리 잘라서 넣어둔다.
+		for (size_t i = 0; i < abs(Diffval); i++)
+			b[i] = result[i];
+		// len1 + Diffval;
+	}
+
+	
+}
+
+int main()
+{
+	std::string a;
+	std::string b;
+	char result[10002]{}; // 마지막에 취합할 변수
+	int len1 = 0, len2 = 0;
+	Input(&a, &b, &len1, &len2, result);
+
+//	std::vector<char> v1;
+//	std::vector<char> v2;
+	
+
+//	if (len1 == len2) // 길이가 같을 때
+//	{		
+//		int len = len1;
+//		EqualLenSum(&a, &b, len, result);
+//		// EqualLenSum(&a, &b, len, result);
+//		// 1. 숫자로 변환해서 처리하기 ( 숫자처리가 가독성이 좋음 )	
+//	}
+	if (len1 >= len2) // len1 이 더 클 때
+	{
+		DiffLenSum(&a, &b, len1, len2, result);
+	}
+	else if (len1 < len2) // len2 가 같거나 더 클 때
+	{
+		// len2 에 대한 처리
+		// Swap
+		Swap(a, b);
+		Swap(len1, len2);
+		DiffLenSum(&a, &b, len1, len2, result);
+	}
+	{
+		int i = 0;
+		bool bTrue = false;
+		if (result[0] == '0')
+		{
+			i = 1;
+			bTrue = true;
+		}
+		while(result[i] != NULL)
+		{
+			std::cout << result[i];
+			i++;
+		}
+	}
+	std::cout << "\n";
+}
