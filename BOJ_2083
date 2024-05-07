@@ -1,0 +1,68 @@
+// BOJ_2083 : 럭비 클럽
+#include <iostream>
+#include <vector>
+#include <string>
+class Group
+{
+public:
+	Group(){}
+	Group(std::string name, int a, int h)
+	{
+		// strcpy_s(this->name, name);
+		this->name = name;
+		age = a;
+		height = h;
+		if (age > 17 || height >= 80)
+		{
+			cate = "Senior";
+		}
+		else
+		{
+			cate = "Junior";
+		}
+	}
+	~Group() {}
+
+public:
+	std::string name;
+	int age = 0;
+	int height = 0;
+	std::string cate;
+};
+
+void LoopFunc(std::vector<Group*> &v)
+{
+	std::string name{};
+	int age = 0;
+	int height = 0;
+
+	bool loop = true;
+	while (loop)
+	{
+		std::cin >> name >> age >> height;
+		if (name == "#" && age == 0 && height == 0)
+		{
+			loop = false;
+		}
+		else
+		{
+			Group* g = new Group(name, age, height);
+			v.push_back(g);
+		}
+	}
+}
+
+void printResult(std::vector<Group*> v)
+{
+	for (int i = 0; i < v.capacity(); i++)
+	{
+		std::cout << v[i]->name << " " << v[i]->cate << "\n";
+	}
+}
+
+int main()
+{
+	std::vector<Group*> v;
+	LoopFunc(v);
+	printResult(v);
+}
