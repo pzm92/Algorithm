@@ -1,0 +1,21 @@
+// BOJ_2845 : 파티가 끝나고 난 뒤
+// https://www.acmicpc.net/problem/2845
+
+#include <iostream>
+int main()
+{
+	int l, p;
+	std::cin >> l >> p;
+	int compare = l * p;
+	int arr[5]{};
+	for (size_t i = 0; i < 5; i++)
+	{
+		std::cin >> arr[i];
+		arr[i] -= compare;
+	}
+	for (size_t i = 0; i < 5; i++)
+	{
+		std::cout << arr[i] << " ";
+	}
+	
+}
