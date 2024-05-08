@@ -1,0 +1,29 @@
+// BOJ_2752 : 세수정렬
+
+#include <iostream>
+#include <algorithm>
+
+void Input(int* arr)
+{
+	for (size_t i = 0; i < 3; i++)
+	{
+		std::cin >> arr[i];
+	}
+}
+
+void printResult(int* arr)
+{
+	for (size_t i = 0; i < 3; i++)
+	{
+		std::cout << arr[i] << " ";
+	}
+}
+
+int main()
+{
+	int arr[3]{};
+	Input(arr);
+	// 정렬
+	std::sort(arr, arr+3);
+	printResult(arr);
+}
