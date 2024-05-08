@@ -1,0 +1,41 @@
+// BOJ_4470 : 줄번호 
+// Bronze_4
+// https://www.acmicpc.net/problem/4470
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+int main()
+{
+	int n;
+	std::cin >> n;
+	std::cin.ignore();
+
+	std::vector<std::string> v;
+
+	for (size_t i = 0; i < n; i++)
+	{
+		std::string s;
+		getline(cin, s);
+
+		// std::cin >> s;
+		
+		// char arr[50]{};
+		// std::cin.getline(arr, 50);
+		
+		// s += (std::string)arr;
+		v.push_back(s);
+	}
+
+	for (size_t i = 0; i < v.size(); i++)
+	{
+		std::cout << i + 1 << ". ";
+		for (size_t j = 0; j < v[i].size(); j++)
+		{
+			std::cout.put(v[i][j]);
+		}
+		if(i != v.size() - 1)
+		 	std::cout << "\n";	
+	}
+	return 0;
+}
