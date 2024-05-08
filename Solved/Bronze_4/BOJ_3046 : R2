@@ -1,0 +1,17 @@
+// BOJ_3046 : R2
+// https://www.acmicpc.net/problem/3046
+
+#include <iostream>
+int main()
+{
+	int r1, s;
+	std::cin >> r1 >> s;	
+	/*
+	s = (r1 + r2) / 2;
+	2s = r1 + r2;
+	2s - r1 = r2;
+	*/
+	int r2 = 0;
+	r2 = 2 * s - r1;
+	std::cout << r2 << "\n";
+}
