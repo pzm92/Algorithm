@@ -1,0 +1,30 @@
+// BOJ_5524 : 입실 관리
+
+#include <iostream>
+#include <vector>
+int main()
+{
+	int n;
+	std::cin >> n;
+
+	std::vector<std::string> v;
+	while (n--)
+	{
+		char arr[21]{};
+		std::cin >> arr;
+	
+		for (size_t i = 0; i < 21; i++)
+		{
+			if (arr[i] >= 'A' && arr[i] <= 'Z')
+			{
+				arr[i] += 32;
+			}
+		}
+		v.push_back(arr);
+	}
+
+	for (size_t i = 0; i < v.size(); i++)
+	{
+		std::cout << v[i] << "\n";
+	}
+}
