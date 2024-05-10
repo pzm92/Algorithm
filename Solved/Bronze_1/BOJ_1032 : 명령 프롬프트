@@ -1,0 +1,48 @@
+// BOJ_1032 : 명령 프롬프트
+// https://www.acmicpc.net/problem/1032
+#include <iostream>
+#include <vector>
+
+std::string matchString(std::string s1, std::string s2)
+{
+	char s[100]{};
+	int loop = s1.size();
+	for (size_t i = 0; i < loop; i++)
+	{
+		if (s1[i] == s2[i])
+		{
+			s[i] = s1[i];
+		}
+		else if (s1[i] != s2[i])
+		{
+			s[i] = '?';
+		}
+	}
+	
+	std::string str = s;
+	return s;
+}
+
+int main()
+{
+	int n;
+	std::cin >> n;
+
+	std::vector<std::string> v;
+
+	for (size_t i = 0; i < n; i++)
+	{
+		std::string s;
+		std::cin >> s;
+		v.push_back(s);
+	}
+
+	std::string match = v[0];
+	for (size_t i = 0; i < v.size() - 1 ; i++)
+	{
+		std::string temp = matchString(v[i], v[i + 1]);			
+		match = matchString(temp, match);
+	}	
+
+	std::cout << match << "\n";
+}
