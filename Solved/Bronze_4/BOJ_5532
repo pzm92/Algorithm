@@ -1,0 +1,23 @@
+// BOJ_5532 : 방학숙제
+// https://www.acmicpc.net/problem/5532
+#include <iostream>
+int main()
+{
+	int l, a, b, c, d;
+	std::cin >> l >> a >> b >> c >> d;
+
+	int guk = a / c + ((a % c) ? 1 : 0);
+
+	int suhak = b / d + ((b % d) ? 1 : 0);
+
+	int result = l - ((guk > suhak) ? guk : suhak);
+	std::cout << result << "\n";
+
+	return 0;
+}
+
+/*
+삼항연산자에서 괄호를 치고 안치고에 따라 값이 변하는 것을 알 수 있었음.
+- int suhak = b / d + ((b % d) ? 1 : 0);// O
+- int suhak = b / d + (b % d) ? 1 : 0;	// X
+*/
