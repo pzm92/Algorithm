@@ -1,0 +1,30 @@
+// BOJ_1145 : 적어도 대부분의 배수
+// https://www.acmicpc.net/problem/1145
+// 20240512T1733 - 20240512T1805
+#include <iostream>
+int main()
+{
+	int arr[5]{};
+	for (size_t i = 0; i < 5; i++)
+	{
+		std::cin >> arr[i];
+	}
+
+	int res = 0;
+	for (long long num = 1; num < 10000000000; num++)
+	{
+		int sum = 0;
+		for (size_t i = 0; i < 5; i++)
+		{
+			if (num % arr[i] == 0)
+				sum++;
+		}
+		if (sum >= 3)
+		{
+			res = num;
+			break;
+		}
+	}
+
+	std::cout << res << "\n";	
+}
