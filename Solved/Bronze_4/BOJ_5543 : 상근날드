@@ -1,0 +1,33 @@
+// BOJ_5543 : 상근날드
+// https://www.acmicpc.net/problem/5543
+#include <iostream>
+int MinPrice(int* BurgerPrice, int loop)
+{
+	int min = 10000000;
+	for (size_t i = 0; i < loop; i++)
+	{
+		if (min > BurgerPrice[i])
+			min = BurgerPrice[i];
+	}
+	return min;
+}
+int main()
+{
+	int BurgerPrice[3]{};
+	int JuicePrice[2]{};
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		std::cin >> BurgerPrice[i];
+	}
+
+	for (size_t i = 0; i < 2; i++)
+	{
+		std::cin >> JuicePrice[i];
+	}
+
+	int result = MinPrice(BurgerPrice, 3) + MinPrice(JuicePrice, 2) - 50;
+	std::cout << result << "\n";
+
+	return 0;
+}
