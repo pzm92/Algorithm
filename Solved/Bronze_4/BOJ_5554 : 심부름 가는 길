@@ -1,0 +1,30 @@
+// BOJ_5554 : 심부름 가는 길
+// https://www.acmicpc.net/problem/5554
+// 20240512T1658 - 20240512T1712
+#include <iostream>
+
+std::pair<int, int> toTime(int sum)
+{
+	int hour = 0;
+	int min = 0;
+
+	hour = sum / 60;
+	min = sum % 60;
+
+	std::pair<int, int> r = std::make_pair(hour, min);
+	return r;
+}
+
+int main()
+{
+	int arr[4]{};
+	int sum = 0;
+	for (size_t i = 0; i < 4; i++)
+	{
+		std::cin >> arr[i];
+		sum += arr[i];
+	}
+
+	std::pair<int, int> result = toTime(sum);
+	std::cout << result.first << "\n" << result.second << "\n";
+}
