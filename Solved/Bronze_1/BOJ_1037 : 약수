@@ -1,0 +1,30 @@
+// BOJ_1037 : 약수
+// https://www.acmicpc.net/problem/1037
+// 20240513T1044 - 20240513T1222
+#include <iostream>
+#include <vector>
+#include <algorithm>
+int main()
+{
+	int n;
+	std::cin >> n;
+
+	std::vector<int> v;
+	v.resize(n);
+	for (size_t i = 0; i < n; i++)
+	{
+		std::cin >> v[i];
+	}
+	
+	std::sort(v.begin(), v.end());
+	
+	int res = 0;
+	if (v.front() == 1)
+	{
+		std::sort(v.begin(), v.end(),std::greater<>());
+		v.pop_back(); 
+		std::sort(v.begin(), v.end());
+	}
+	res = v[0] * v[v.size() - 1];
+	std::cout << res << "\n";
+}
