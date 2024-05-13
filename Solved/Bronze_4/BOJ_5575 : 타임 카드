@@ -1,0 +1,56 @@
+// BOJ_5575 : 타임 카드
+// https://www.acmicpc.net/problem/5575
+// 20240513T0934 - 20240513T0954
+#include <iostream>
+#include <vector>
+std::pair<int, std::pair<int, int>> SevenTimeStart(int* s, int* e)
+{
+	int res[3]{};
+	std::pair<int, std::pair<int, int>> r;
+
+	for (size_t i = 0; i < 3; i++)
+		res[i] = e[i] - s[i];
+
+	for (int i = 2; i >= 0; i--)
+	{
+		if (res[i] < 0)
+		{
+			if (i - 1 < 0)
+			{
+				r = std::make_pair(-1, std::make_pair(-1, -1));
+				return r;
+			}
+			else
+			{
+				res[i] += 60;
+				res[i - 1]--;
+			}
+		}
+	}
+	
+	r = std::make_pair(res[0], std::make_pair(res[1], res[2]));
+	return r;
+}
+
+int main()
+{
+	int n = 3;
+	int s[3]{};
+	int e[3]{};
+	std::vector<std::pair<int, std::pair<int, int>>> v;
+	while (n--)
+	{
+		std::pair<int, std::pair<int, int>> result;
+		for (size_t i = 0; i < 3; i++)
+			std::cin >> s[i];
+		for (size_t i = 0; i < 3; i++)
+			std::cin >> e[i];
+		result = SevenTimeStart(s, e);
+		v.push_back(result);
+	}
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		std::cout << v[i].first << " " << v[i].second.first << " " << v[i].second.second << "\n";
+	}
+}
