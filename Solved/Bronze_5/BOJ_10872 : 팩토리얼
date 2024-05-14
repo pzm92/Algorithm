@@ -1,0 +1,17 @@
+// BOJ_10872 : 팩토리얼
+// https://www.acmicpc.net/problem/10872
+// 20240514T1212 - 20240514T1215
+#include <iostream>
+int factorial(int n)
+{
+	if (n == 1 || n == 0) 
+		return 1;
+
+	return n * factorial(n - 1);
+}
+int main()
+{
+	int n;
+	std::cin >> n;
+	std::cout << factorial(n) << "\n";
+}
