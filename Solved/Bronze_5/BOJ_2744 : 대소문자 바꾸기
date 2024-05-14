@@ -1,0 +1,21 @@
+// BOJ_2744 : 대소문자 바꾸기
+// https://www.acmicpc.net/problem/2744
+// 20240514T1233 - 20240514T1235
+#include <iostream>
+int main()
+{
+	char arr[100]{};
+	std::cin >> arr;
+	for (size_t i = 0; i < 100; i++)
+	{
+		if (arr[i] >= 'a' && arr[i] <= 'z')
+		{
+			arr[i] -= 32;
+		}
+		else if (arr[i] >= 'A' && arr[i] <= 'Z')
+		{
+			arr[i] += 32;
+		}
+	}
+	std::cout << arr << "\n";
+}
