@@ -1,0 +1,11 @@
+// BOJ_2743 : 단어 길이 재기
+// https://www.acmicpc.net/problem/2743
+// 20240514T1228 - 20240514T1229
+#include <iostream>
+int main()
+{
+	std::string s;
+	std::cin >> s;
+	int len = s.length();
+	std::cout << len << "\n";
+}
