@@ -1,0 +1,12 @@
+// BOJ_2420 : 사파리월드
+// https://www.acmicpc.net/problem/2420
+// 20240514T1157 - 20240514T1202
+#include <iostream>
+int main()
+{
+	long long n, m;
+	std::cin >> n >> m;
+	
+	long long res = std::abs(n - m);
+	std::cout << res << "\n";
+}
