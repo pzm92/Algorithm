@@ -1,0 +1,30 @@
+// BOJ_1075 : 나누기
+// https://www.acmicpc.net/problem/1075
+#include <iostream>
+int main()
+{
+	int n, f;
+	std::cin >> n >> f;
+
+	// 맨 뒤에 있는 두 자리 수를 빼기 위해 
+	// 100을 나누고 곱한다.
+	int n1 = (n / 100) * 100;
+
+	int result = 0; // 결과값 저장을 위한 변수
+
+	for (size_t i = 0; i < 100; i++)
+	{
+		// 00부터 99까지 딱 맞아떨어지는 최솟값을 구한다.
+		if ((n1 + i) % f == 0)
+		{
+			result = i;
+			break;
+		}
+	}
+
+	if (result <= 9 && result >= 0)
+	{
+		std::cout << 0;
+	}
+	std::cout << result << "\n";
+}
