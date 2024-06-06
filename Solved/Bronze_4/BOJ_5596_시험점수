@@ -1,0 +1,29 @@
+// BOJ_5596 : 시험점수
+// https://www.acmicpc.net/problem/5596
+
+#include <iostream>
+void Input(int* n)
+{
+	for (size_t i = 0; i < 4; i++)
+	{
+		int temp = 0;
+		std::cin >> temp;
+		*n += temp;
+	}
+}
+void PrintResult(int n1, int n2)
+{
+	if (n1 >= n2)
+		std::cout << n1 << "\n";
+	else
+		std::cout << n2 << "\n";
+}
+int main()
+{
+	int min = 0;
+	int manse = 0;
+
+	Input(&min);
+	Input(&manse);
+	PrintResult(min, manse);
+}
