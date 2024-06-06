@@ -1,0 +1,25 @@
+// BOJ_27294 : 몇개고?
+// https://www.acmicpc.net/problem/27294
+#include <iostream>
+
+int main()
+{
+	int t, s;
+	std::cin >> t >> s;
+
+	// 술하고 같이 초밥을 먹을 때 280개
+	if (s == 1)
+	{
+		std::cout << 280 << "\n";
+	}
+	
+	// 점심식사가 아닐 때 280개
+	else if (t <= 11 || t >= 17)
+		std::cout << 280 << "\n";
+
+	// 점심 식사이면서 술과 같이 먹지 않을 때는 320개
+	else if (t >= 12 && t <= 16 && s == 0) 
+		std::cout << 320 << "\n";
+
+	return 0;
+}
