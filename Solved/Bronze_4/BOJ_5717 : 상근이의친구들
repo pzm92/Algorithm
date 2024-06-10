@@ -1,0 +1,20 @@
+// BOJ_5717_상근이의친구들
+// https://www.acmicpc.net/problem/5717
+
+#include <iostream>
+#include <vector>
+int main()
+{
+	std::vector<int> v;
+	while (true)
+	{
+		int m, f;
+		std::cin >> m >> f;
+		if (m == 0 && f == 0) break;
+		v.push_back(m + f);
+	}
+	for (size_t i = 0; i < v.size(); i++)
+	{
+		std::cout << v[i] << "\n";
+	}
+}
