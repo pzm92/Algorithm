@@ -1,0 +1,50 @@
+// BOJ_10101_삼각형외우기
+// https://www.acmicpc.net/problem/10101
+
+#include <iostream>
+
+// 세 각의 합이 180인지 확인하는 함수
+// 180이면 true 리턴, 180이 아니라면 false 리턴
+bool _180Sum(int a, int b, int c)
+{
+	int sum = a + b + c;
+	if (sum == 180)
+		return true;
+	else return false;
+}
+
+// a와 b의 값이 같은지 확인하는 함수.
+// 같을 때 true 리턴, 틀릴 때 false 리턴
+bool IsEquil(int a, int b)
+{
+	if (a == b) return true;
+	else return false;
+}
+
+int main()
+{
+	int a, b, c;
+	std::cin >> a >> b >> c;
+
+	// 세 각의 합이 180을 만족하는가
+	if (_180Sum(a, b, c) == false)
+		std::cout << "Error\n";
+
+	// 세 각은 같은 값을 가지고 있는가
+	else if (a == b && b == c && c == 60)
+		std::cout << "Equilateral\n";
+	else
+	{
+		bool bb = false;
+		bb |= IsEquil(a, b);
+		bb |= IsEquil(a, c);
+		bb |= IsEquil(b, c);
+
+		// 세 각 중 두 각이 같으면 Isosceles
+		// 하나도 같은 각이 없다면 Scalene
+		if (bb)
+			std::cout << "Isosceles\n";
+		else std::cout << "Scalene\n";
+	}
+
+}
