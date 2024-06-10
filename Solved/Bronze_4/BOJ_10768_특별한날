@@ -1,0 +1,20 @@
+// BOJ_10768_특별한날
+// https://www.acmicpc.net/problem/10768
+
+#include <iostream>
+int main()
+{
+	int m, d;
+	std::cin >> m >> d;
+	if (m == 2)
+	{
+		if (d == 18) std::cout << "Special\n";
+		if (d <= 17)std::cout << "Before\n";
+		if (d >= 19)std::cout << "After\n";
+	}
+	else if (m < 2) std::cout << "Before\n";
+	else if (m > 2) std::cout << "After\n";
+
+	// comment : 
+	// 어떤 식으로 분기 조건을 성립시킬 수 있는 지를 시험하는 문제
+}
