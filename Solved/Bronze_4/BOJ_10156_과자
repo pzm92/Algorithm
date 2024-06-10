@@ -1,0 +1,16 @@
+// BOJ_10156_과자
+// https://www.acmicpc.net/problem/10156
+
+#include <iostream>
+int main()
+{
+	int k, n, m;
+	std::cin >> k >> n >> m;
+	if (k * n > m)
+	{
+		int addMoney = k * n - m;
+		std::cout << addMoney << "\n";
+	}
+	else
+		std::cout << 0 << "\n";
+}
