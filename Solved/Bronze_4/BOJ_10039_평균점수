@@ -1,0 +1,21 @@
+// BOJ_10039_평균점수
+// https://www.acmicpc.net/problem/10039
+
+#include <iostream>
+int main()
+{
+	int arr[5]{};
+	int sum = 0;
+	int avg = 0;
+	for (size_t i = 0; i < 5; i++)
+	{
+		std::cin >> arr[i];
+		if (arr[i] < 40)
+		{
+			arr[i] = 40;
+		}
+		sum += arr[i];
+	}
+	avg = sum / 5;
+	std::cout << avg << "\n";	
+}
