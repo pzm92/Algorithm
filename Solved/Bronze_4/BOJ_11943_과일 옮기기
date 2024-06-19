@@ -1,0 +1,24 @@
+// BOJ_11943_과일 옮기기
+// https://www.acmicpc.net/problem/11943
+#include <iostream>
+int main()
+{
+	int a, b, c, d;
+	std::cin >> a >> b >> c >> d;
+	int adAdd = a + d;
+	int bcAdd = b + c;
+	int res{};
+	if (adAdd == bcAdd)
+	{
+		res = adAdd;
+	}
+	else if (adAdd < bcAdd)
+	{
+		res = adAdd;
+	}
+	else if (adAdd > bcAdd)
+	{
+		res = bcAdd;
+	}
+	std::cout << res << "\n";
+}
