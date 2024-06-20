@@ -1,0 +1,23 @@
+// BOJ_14581_팬들에게 둘러싸인 홍준
+// https://www.acmicpc.net/problem/14581
+
+#include <iostream>
+void PrintStr(std::string s)
+{
+	std::cout << ":" << s << ":";
+}
+int main()
+{
+	std::string hongjun;
+	std::cin >> hongjun;
+	for (size_t i = 0; i < 3; i++)
+	{
+		for (size_t j = 0; j < 3; j++)
+		{
+			if (i == 1 && j == 1)
+				PrintStr(hongjun);
+			else PrintStr("fan");
+		}
+		std::cout << "\n";
+	}
+}
