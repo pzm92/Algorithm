@@ -1,0 +1,36 @@
+// BOJ_11948_과목선택
+// https://www.acmicpc.net/problem/11948
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+int main()
+{
+	std::vector<int> v1;
+	for (size_t i = 0; i < 4; i++)
+	{
+		int temp;
+		std::cin >> temp;
+		v1.push_back(temp);
+	}
+	std::vector<int> v2;
+	for (size_t i = 0; i < 2; i++)
+	{
+		int temp;
+		std::cin >> temp;
+		v2.push_back(temp);
+	}
+	
+	std::sort(v1.begin(), v1.end(), std::greater<>());
+	std::sort(v2.begin(), v2.end(), std::greater<>());
+		
+	int res = 0;
+	for (size_t i = 0; i < 3; i++)
+	{
+		res += v1[i];
+	}
+	res += v2[0];
+
+	std::cout << res << "\n";
+	return 0;
+}
