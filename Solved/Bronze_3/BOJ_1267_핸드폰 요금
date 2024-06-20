@@ -1,0 +1,60 @@
+// BOJ_1267_핸드폰 요금
+// https://www.acmicpc.net/problem/1267
+
+#include <iostream>
+int young(int t)
+{
+	int y = t / 30;
+	
+	// 0 ~ 29 범위를 뜻하므로 
+	// t를 30으로 나눈 나머지가 0일 때에도 
+	// 증감조건에 해당된다.
+	if (t % 30 != 0 || t % 30 == 0)
+		y++;
+	return y * 10;
+}
+
+int min(int t)
+{
+	int m = t / 60;
+
+	// 0 ~ 59 범위를 뜻하므로 
+	// t를 60으로 나눈 나머지가 0일 때에도 
+	// 증감조건에 해당된다.
+	if (t % 60 != 0 || t % 60 == 0)
+		m++;
+	return m * 15;
+}
+
+int main()
+{
+	// 선언 및 입력부
+	int n;
+	std::cin >> n;
+	int m = 0, y = 0;
+
+	// 처리부
+	for (int i = 0; i < n; i++)
+	{
+		int t = 0;
+		std::cin >> t;
+		m += min(t);
+		y += young(t);
+	}
+
+	// 출력부
+	if (m == y)
+	{
+		std::cout << "Y M " << m;
+	}
+	else if (m > y)
+	{
+		std::cout << "Y " << y;
+	}
+	else if (m < y)
+	{
+		std::cout << "M " << m;
+	}
+
+	return 0;
+}
