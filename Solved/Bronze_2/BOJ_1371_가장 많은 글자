@@ -1,0 +1,49 @@
+// BOJ_1371_가장 많은 글자
+// https://www.acmicpc.net/problem/1371
+
+#include <iostream>
+#include <string>
+#include <vector>
+int main()
+{
+	int mask[256]{};
+	std::string s[50];
+	
+	for (int i = 0; i < 50; i++)
+	{
+		std::getline(std::cin, s[i]);
+	}
+
+	for (int i = 0; i < 50; i++)
+	{
+		for (char c : s[i])
+		{
+			mask[c]++;
+		}
+	}
+
+	int max = 0;
+	int idx = -1;
+	std::vector<int> v;
+	for (int i = 97; i <= 122; i++)
+	{
+		if (max < mask[i])
+		{
+			max = mask[i];
+			idx = i;
+			v.clear();
+			v.push_back(i);
+		}
+		else if (max == mask[i])
+		{
+			v.push_back(i);
+		}
+	}
+
+	for (int i = 0; i < v.size(); i++)
+	{
+		std::cout << (char)v[i];
+	}
+	std::cout << "\n";
+	return 0;
+}
